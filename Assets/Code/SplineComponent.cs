@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -97,6 +98,12 @@ public class SplineComponent : MonoBehaviour, ISpline
     }
 
 
+    private void ResetIndex()
+    {
+        throw new NotImplementedException();
+    }
+
+
     internal static Vector3 Interpolate(Vector3 a, Vector3 b, Vector3 c, Vector3 d, float u)
     {
         return (
@@ -148,14 +155,14 @@ public class SplineComponent : MonoBehaviour, ISpline
         }
 
 
-        public void RemoveControlPoint(int index)
+    public void RemoveControlPoint(int index)
         {
             ResetIndex();
             points.RemoveAt(index);
         }
 
 
-        public void GetControlPoint(int index)
+        public Vector3 GetControlPoint(int index)
         {
             return points[index];
         }

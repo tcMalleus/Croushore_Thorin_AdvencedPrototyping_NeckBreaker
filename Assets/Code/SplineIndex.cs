@@ -10,20 +10,23 @@ public class SplineIndex
 
     public int ControlPointCount => spline.ControlPointCount;
 
-
     public SplineIndex(SplineComponent spline)
     {
         this.spline = spline;
         ReIndex();
     }
 
+    public SplineIndex(SplineIndex splineIndex)
+    {
+        this.splineIndex = splineIndex;
+    }
 
     public void ReIndex()
     {
         var searchStepSize = 0.00001f;
         var length = spline.GetLength(searchStepSize);
         var indexSize = Mathf.FloorToInt(length * 2);
-        var linearPoints = new List<Vector3>(indexSize);
+        var _linearPoints = new List<Vector3>(indexSize);
         var t = 0f;
 
 
@@ -69,6 +72,7 @@ public class SplineIndex
         get
         {
             if (uniformIndex == null) uniformIndex = new SplineIndex(this);
+            return uniformIndex;
         }
     }
 
@@ -124,9 +128,9 @@ public class SplineIndex
         return D;
     }
 
-    pulblic Vector3 GetDistance(float distance)
+    public Vector3 GetDistance(float distance)
     {
-        if (GetLength == null) GetLength = GetLength();
+        if (length == null) length = GetLength();
         return uniformIndex.GetPoint(distance / GetLength.Value);
     }
 
