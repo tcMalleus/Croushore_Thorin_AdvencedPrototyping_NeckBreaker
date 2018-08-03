@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        while (Input.GetAxis("GrabRight") >= 1)
+        if (Input.GetAxis("GrabRight") >= 1)
         {
             GrabRight();
         }
