@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour {
 
     public Transform enemy;
+    public bool IsGrabbed;
 
     private Transform closest;
     private NavMeshAgent agent;
@@ -27,10 +28,11 @@ public class PlayerController : MonoBehaviour {
         {
             GrabRight();
         }
-        //if (Input.GetAxis("GrabLeft"))
-       // {
-       //     GrabRight();
-       // }
+        if (Input.GetAxis("GrabLeft") >= 1)
+        {
+            GrabRight();
+        }
+        //if (IsGrabbed = true && )
     }
 
     private IEnumerator NavUpdate(float waitTime)
@@ -64,11 +66,13 @@ public class PlayerController : MonoBehaviour {
     void GrabRight()
     {
         Debug.Log("GrabbedRight");
+        IsGrabbed = true;
     }
 
     void GrabLeft()
     {
-
+        Debug.Log("GrabbedLeft");
+        IsGrabbed = true;
     }
 
     void TwistRight()
