@@ -65,6 +65,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.isTrigger == false && other.tag == "Enemy")
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
+                enemyNav.enabled = false;
+            }
+
+            agent.enabled = false;
+        }
+    }
+
 
     void GrabRight()
     {

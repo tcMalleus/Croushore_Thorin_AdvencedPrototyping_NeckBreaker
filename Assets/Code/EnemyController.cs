@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        transform.LookAt(player.transform);
+        //transform.LookAt(player.transform);
     }
 
     void OnTriggerEnter(Collider other)
