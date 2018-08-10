@@ -12,9 +12,13 @@ public class PlayerController : MonoBehaviour {
     private NavMeshAgent agent;
     private IEnumerator coroutine;
 
+    GameObject[] enemies;
+
 	// Use this for initialization
 	void Start ()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         agent = GetComponent<NavMeshAgent>();
 
         coroutine = NavUpdate(0.25f);
@@ -41,12 +45,11 @@ public class PlayerController : MonoBehaviour {
         {
             yield return new WaitForSeconds(waitTime);
 
-            GameObject[] gos;
-            gos = GameObject.FindGameObjectsWithTag("Enemy");
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
             float distance = Mathf.Infinity;
             Vector3 position = transform.position;
 
-            foreach (GameObject go in gos)
+            foreach (GameObject go in enemies)
             {
                 Vector3 diff = go.transform.position - position;
                 float curDistance = diff.sqrMagnitude;

@@ -18,6 +18,14 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        agent.destination = player.transform.position;
-	}
+        transform.LookAt(player.transform);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            agent.destination = player.transform.position;
+        }
+    }
 }
