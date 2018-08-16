@@ -6,26 +6,36 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour {
 
     private GameObject player;
+    private PlayerController playerController;
     private NavMeshAgent agent;
+    private bool playerInTrigger;
 
-	// Use this for initialization
 	void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+        playerInTrigger = false;
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
-        //transform.LookAt(player.transform);
+        if (playerInTrigger == true)
+        {
+            agent.destination = player.transform.position;
+
+            if (player.GetComponent<PlayerController>().isTwisted == true && playerController.closest == gameObject.transform)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            agent.destination = player.transform.position;
+            playerInTrigger = true;
         }
     }
 }
