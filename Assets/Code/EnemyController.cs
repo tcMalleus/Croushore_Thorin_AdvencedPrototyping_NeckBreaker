@@ -6,15 +6,16 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour {
 
     private GameObject player;
-    private PlayerController playerController;
     private NavMeshAgent agent;
     private bool playerInTrigger;
+    private PlayerController playerRef;
 
 	void Start ()
     {
+        playerRef = FindObjectOfType<PlayerController>();
+
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerController = player.GetComponent<PlayerController>();
+        //player = GameObject.FindGameObjectWithTag("Player");
         playerInTrigger = false;
 	}
 	
@@ -22,9 +23,9 @@ public class EnemyController : MonoBehaviour {
     {
         if (playerInTrigger == true)
         {
-            agent.destination = player.transform.position;
+            agent.destination = playerRef.transform.position;
 
-            if (player.GetComponent<PlayerController>().isTwisted == true && playerController.closest == gameObject.transform)
+            if (playerRef.isTwisted == true && playerRef.closest == gameObject.transform)
             {
                 Destroy(gameObject);
             }

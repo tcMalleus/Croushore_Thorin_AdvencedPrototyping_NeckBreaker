@@ -152,6 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114396955860476396, guid: 3628089e68e254440bd53ea9191a88aa,
+        type: 2}
+      propertyPath: PlayerRef
+      value: 
+      objectReference: {fileID: 307625824}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
   m_IsPrefabAsset: 0
@@ -354,6 +359,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 205972665}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &307625824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114541150701124708, guid: 4203d90f116306047ad97267637677ab,
+    type: 2}
+  m_PrefabInternal: {fileID: 194260010}
+  m_Script: {fileID: 11500000, guid: 907609f3144dd0340b28ae94d88f31e9, type: 3}
 --- !u!1001 &777164389
 Prefab:
   m_ObjectHideFlags: 0
@@ -393,21 +404,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114396955860476396, guid: 3628089e68e254440bd53ea9191a88aa,
+        type: 2}
+      propertyPath: PlayerRef
+      value: 
+      objectReference: {fileID: 307625824}
     - target: {fileID: 1646804180636998, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 135365824035375514, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969685609499814, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114797511847755260, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &882871180
@@ -449,21 +455,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114396955860476396, guid: 3628089e68e254440bd53ea9191a88aa,
+        type: 2}
+      propertyPath: PlayerRef
+      value: 
+      objectReference: {fileID: 307625824}
     - target: {fileID: 1646804180636998, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 135365824035375514, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969685609499814, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114797511847755260, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1022532665
@@ -678,21 +679,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114396955860476396, guid: 3628089e68e254440bd53ea9191a88aa,
+        type: 2}
+      propertyPath: PlayerRef
+      value: 
+      objectReference: {fileID: 307625824}
     - target: {fileID: 1646804180636998, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 135365824035375514, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969685609499814, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114797511847755260, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &2110857221 stripped
