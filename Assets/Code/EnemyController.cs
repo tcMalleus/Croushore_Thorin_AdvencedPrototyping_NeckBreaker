@@ -5,27 +5,27 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
-    private GameObject player;
     private NavMeshAgent agent;
     private bool playerInTrigger;
-    private PlayerController playerRef;
+    private PlayerController player;
 
+    //Start
 	void Start ()
     {
-        playerRef = FindObjectOfType<PlayerController>();
-
+        player = FindObjectOfType<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
-        //player = GameObject.FindGameObjectWithTag("Player");
         playerInTrigger = false;
 	}
 	
+    //Update
 	void Update ()
     {
+        //NavMeshAgent destination and death conditions
         if (playerInTrigger == true)
         {
-            agent.destination = playerRef.transform.position;
+            agent.destination = player.transform.position;
 
-            if (playerRef.isTwisted == true && playerRef.closest == gameObject.transform)
+            if (player.isTwisted == true && player.closest == gameObject.transform)
             {
                 Destroy(gameObject);
             }

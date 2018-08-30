@@ -5,30 +5,47 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour {
 
-    public Transform enemy;
-    public bool IsGrabbed;
-    public GameObject grabOffset;
+    //Action vars
+    public bool isGrabbed;
     public bool isTwisted;
+    public GameObject grabOffset;
 
+    //NavMeshAgent's
     public Transform closest;
     private NavMeshAgent agent;
     private IEnumerator coroutine;
-    private bool nearEnemy;
-
     GameObject[] enemies;
 
+    //Enemy trigger volume's
+    private bool triggered = false;
+    private bool nearEnemy;
+    Collider other;
+
+    //Start
 	void Start ()
     {
+        //NavMeshAgent and coroutine's declarations
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         agent = GetComponent<NavMeshAgent>();
-        grabOffset = GameObject.Find("Grab Offset");
-
         coroutine = NavUpdate(0.25f);
         StartCoroutine(coroutine);
+
+        //Action declarations
+        grabOffset = GameObject.Find("Grab Offset");
+
 	}
 	
+    //Update
 	void Update ()
     {
+        //OnTriggerExit update check
+        if (triggered && !other)
+        {
+            nearEnemy = false;
+        }
+
+        //Inputs
+        //Grab inputs
         if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown("right"))
         {
             GrabRight();
@@ -43,15 +60,14 @@ public class PlayerController : MonoBehaviour {
 
             agent.enabled = true;
 
-            IsGrabbed = false;
+            isGrabbed = false;
         }
-
-        /*
+        
         if (Input.GetAxis("GrabLeft") >= 1 || Input.GetKeyDown("left"))
         {
-            GrabRight();
+            GrabLeft();
         }
-        else
+        else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp("left"))
         {
             foreach (GameObject enemy in enemies)
             {
@@ -61,9 +77,9 @@ public class PlayerController : MonoBehaviour {
 
             agent.enabled = true;
         }
-        */
-
-        if (IsGrabbed = true && Input.GetKeyDown("d"))
+        
+        //Twist inputs
+        if (isGrabbed = true && Input.GetKeyDown("d"))
         {
             TwistRight();
         } 
@@ -73,6 +89,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    //NavMeshAgent's destination is nearest enemy
     private IEnumerator NavUpdate(float waitTime)
     {
         while (true)
@@ -99,28 +116,28 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+
+    //Entering and exiting enemy's collider
     private void OnTriggerEnter(Collider other)
     {
+        triggered = true;
+        this.other = other;
+
+        //Enter trigger logic
         if (other.isTrigger == true && other.tag == "Enemy")
         {
             nearEnemy = true;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.isTrigger == true && other.tag == "Enemy")
-        {
-            nearEnemy = false;
-        }
-    }
 
 
+    //Action functions
     public void GrabRight()
     {
 
         if (nearEnemy == true)
         {
-            IsGrabbed = true;
+            isGrabbed = true;
 
             closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
 
@@ -137,7 +154,7 @@ public class PlayerController : MonoBehaviour {
     public void GrabLeft()
     {
         Debug.Log("GrabbedLeft");
-        IsGrabbed = true;
+        isGrabbed = true;
     }
 
     public void TwistRight()
