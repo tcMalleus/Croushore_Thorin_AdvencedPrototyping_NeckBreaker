@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour {
 
     //Action vars
+    public bool isGrabbedLeft;
+    public bool isGrabbedRight;
     public bool isGrabbed;
+    public bool isDoubleGrabbed;
     public bool isTwisted;
     public GameObject grabOffset;
 
@@ -21,17 +24,30 @@ public class PlayerController : MonoBehaviour {
     private bool nearEnemy;
     Collider other;
 
+    public List<KeyCode> ButtonCombo = new List<KeyCode>();
+
+    public int _currentComboStage = 0;
+    public KeyCode _currentComboKey;
+    public KeyCode _nextComboKey;
+
+    //public ComboManager ComboScript;
+
     //Start
-	void Start ()
+    void Start ()
     {
-        //NavMeshAgent and coroutine's declarations
+        //NavMeshAgent and coroutine's definitions
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         agent = GetComponent<NavMeshAgent>();
         coroutine = NavUpdate(0.25f);
         StartCoroutine(coroutine);
 
-        //Action declarations
+        //Action definitions
         grabOffset = GameObject.Find("Grab Offset");
+
+        print(ButtonCombo[0].ToString());
+
+        _currentComboKey = ButtonCombo[0];
+        _nextComboKey = ButtonCombo[1];
 
 	}
 	
@@ -46,11 +62,12 @@ public class PlayerController : MonoBehaviour {
 
         //Inputs
         //Grab inputs
-        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown("right"))
+        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown(KeyCode.RightArrow))
         {
             GrabRight();
+
         }
-        else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp("right"))
+        else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp(KeyCode.RightArrow))
         {
             foreach (GameObject enemy in enemies)
             {
@@ -63,11 +80,11 @@ public class PlayerController : MonoBehaviour {
             isGrabbed = false;
         }
         
-        if (Input.GetAxis("GrabLeft") >= 1 || Input.GetKeyDown("left"))
+        if (Input.GetAxis("GrabLeft") >= 1 || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             GrabLeft();
         }
-        else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp("left"))
+        else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp(KeyCode.LeftArrow))
         {
             foreach (GameObject enemy in enemies)
             {
@@ -77,9 +94,19 @@ public class PlayerController : MonoBehaviour {
 
             agent.enabled = true;
         }
-        
+
+        if (isGrabbedLeft == true || isGrabbedRight == true)
+        {
+            isGrabbed = true;
+        }
+
+        if (isGrabbedLeft == true && isGrabbedRight == true)
+        {
+            isDoubleGrabbed = true;
+        }
+
         //Twist inputs
-        if (isGrabbed = true && Input.GetKeyDown("d"))
+        if (isGrabbed = true && Input.GetKeyDown(KeyCode.D))
         {
             TwistRight();
         } 
@@ -87,6 +114,24 @@ public class PlayerController : MonoBehaviour {
         {
             isTwisted = false;
         }
+
+        UpdateCombo();
+    }
+
+    void UpdateCombo(KeyCode _keyJustHit)
+    {
+
+        if (_currentComboKey == _keyJustHit && _currentComboStage + 1 < ButtonCombo.Count)
+        {
+            _currentComboKey = ButtonCombo[_currentComboStage + 1];
+            _currentComboStage++;
+        }
+        else
+        {
+            _currentComboKey = ButtonCombo[0];
+            _currentComboStage = 0;
+        }
+
     }
 
     //NavMeshAgent's destination is nearest enemy
@@ -112,7 +157,8 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-            agent.destination = closest.position;
+            if(agent.enabled == true && closest)
+                agent.destination = closest.position;
         }
     }
 
@@ -153,8 +199,20 @@ public class PlayerController : MonoBehaviour {
 
     public void GrabLeft()
     {
-        Debug.Log("GrabbedLeft");
-        isGrabbed = true;
+        if (nearEnemy == true)
+        {
+            isGrabbed = true;
+
+            closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
+
+            foreach (GameObject enemy in enemies)
+            {
+                NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
+                enemyNav.enabled = false;
+            }
+
+            agent.enabled = false;
+        }
     }
 
     public void TwistRight()

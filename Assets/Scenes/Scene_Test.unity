@@ -152,11 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114396955860476396, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: PlayerRef
-      value: 
-      objectReference: {fileID: 307625824}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
   m_IsPrefabAsset: 0
@@ -233,6 +228,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114541150701124708, guid: 4203d90f116306047ad97267637677ab,
+        type: 2}
+      propertyPath: ButtonCombo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4608006116851158, guid: 4203d90f116306047ad97267637677ab, type: 2}
       propertyPath: m_LocalPosition.x
       value: 8.96
@@ -269,6 +269,21 @@ Prefab:
         type: 2}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541150701124708, guid: 4203d90f116306047ad97267637677ab,
+        type: 2}
+      propertyPath: ButtonCombo.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541150701124708, guid: 4203d90f116306047ad97267637677ab,
+        type: 2}
+      propertyPath: ButtonCombo.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541150701124708, guid: 4203d90f116306047ad97267637677ab,
+        type: 2}
+      propertyPath: ButtonCombo.Array.data[2]
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4203d90f116306047ad97267637677ab, type: 2}

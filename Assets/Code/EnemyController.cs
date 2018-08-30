@@ -23,7 +23,8 @@ public class EnemyController : MonoBehaviour {
         //NavMeshAgent destination and death conditions
         if (playerInTrigger == true)
         {
-            agent.destination = player.transform.position;
+            if(agent.enabled)
+                agent.destination = player.transform.position;
 
             if (player.isTwisted == true && player.closest == gameObject.transform)
             {
