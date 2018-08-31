@@ -24,17 +24,20 @@ public class PlayerController : MonoBehaviour {
     private bool nearEnemy;
     Collider other;
 
+    public ComboManager ComboManager;
+
     public List<KeyCode> ButtonCombo = new List<KeyCode>();
 
     public int _currentComboStage = 0;
     public KeyCode _currentComboKey;
     public KeyCode _nextComboKey;
 
-    //public ComboManager ComboScript;
 
     //Start
     void Start ()
     {
+        ComboManager = FindObjectOfType<ComboManager>();
+
         //NavMeshAgent and coroutine's definitions
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         agent = GetComponent<NavMeshAgent>();
@@ -115,9 +118,11 @@ public class PlayerController : MonoBehaviour {
             isTwisted = false;
         }
 
-        UpdateCombo();
+        //Push key to ComboManager
+        ComboManager.UpdateCombo(Input.inputString);
     }
 
+    /*
     void UpdateCombo(KeyCode _keyJustHit)
     {
 
@@ -133,6 +138,7 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
+    */
 
     //NavMeshAgent's destination is nearest enemy
     private IEnumerator NavUpdate(float waitTime)

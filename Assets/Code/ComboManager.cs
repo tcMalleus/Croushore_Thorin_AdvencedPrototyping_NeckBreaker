@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ComboManager : MonoBehaviour {
 
+    [SerializeField]
     public List<string> ButtonCombo = new List<string>();
 
     public int _currentComboStage = 0;
     public string _currentComboKey;
     public string _nextComboKey;
 
-	// Use this for initialization
+	//Start
 	void Start () {
 
         _currentComboKey = ButtonCombo[0];
@@ -18,13 +20,16 @@ public class ComboManager : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	//Update
 	void Update () {
 		
 	}
 
-    void UpdateCombo(string _keyJustHit)
+    public void UpdateCombo(string _keyJustHit)
     {
+
+        Debug.Log(_keyJustHit);
+
         if (_currentComboKey == _keyJustHit && _currentComboStage + 1 < ButtonCombo.Count)
         {
             _currentComboKey = ButtonCombo[_currentComboStage + 1];
