@@ -24,13 +24,9 @@ public class PlayerController : MonoBehaviour {
     private bool nearEnemy;
     Collider other;
 
+
+    //Combo manager's
     public ComboManager ComboManager;
-
-    public List<KeyCode> ButtonCombo = new List<KeyCode>();
-
-    public int _currentComboStage = 0;
-    public KeyCode _currentComboKey;
-    public KeyCode _nextComboKey;
 
 
     //Start
@@ -46,12 +42,6 @@ public class PlayerController : MonoBehaviour {
 
         //Action definitions
         grabOffset = GameObject.Find("Grab Offset");
-
-        print(ButtonCombo[0].ToString());
-
-        _currentComboKey = ButtonCombo[0];
-        _nextComboKey = ButtonCombo[1];
-
 	}
 	
     //Update
@@ -68,14 +58,16 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown(KeyCode.RightArrow))
         {
             GrabRight();
-
         }
         else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp(KeyCode.RightArrow))
         {
             foreach (GameObject enemy in enemies)
             {
-                NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
-                enemyNav.enabled = true;
+                if (enemy)
+                {
+                    NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
+                    enemyNav.enabled = true;
+                }
             }
 
             agent.enabled = true;
@@ -119,27 +111,13 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Push key to ComboManager
-        ComboManager.UpdateCombo(Input.inputString);
+        if (Input.inputString != null && nearEnemy == true)
+        {
+            ComboManager.UpdateCombo(Input.inputString);
+        }
     }
 
-    /*
-    void UpdateCombo(KeyCode _keyJustHit)
-    {
-
-        if (_currentComboKey == _keyJustHit && _currentComboStage + 1 < ButtonCombo.Count)
-        {
-            _currentComboKey = ButtonCombo[_currentComboStage + 1];
-            _currentComboStage++;
-        }
-        else
-        {
-            _currentComboKey = ButtonCombo[0];
-            _currentComboStage = 0;
-        }
-
-    }
-    */
-
+   
     //NavMeshAgent's destination is nearest enemy
     private IEnumerator NavUpdate(float waitTime)
     {
@@ -164,7 +142,9 @@ public class PlayerController : MonoBehaviour {
             }
 
             if(agent.enabled == true && closest)
+            {
                 agent.destination = closest.position;
+            }
         }
     }
 
@@ -189,7 +169,7 @@ public class PlayerController : MonoBehaviour {
 
         if (nearEnemy == true)
         {
-            isGrabbed = true;
+            isGrabbedRight = true;
 
             closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
 
@@ -207,7 +187,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (nearEnemy == true)
         {
-            isGrabbed = true;
+            isGrabbedLeft = true;
 
             closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
 
