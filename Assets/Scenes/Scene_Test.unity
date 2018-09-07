@@ -120,11 +120,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114539294685998068, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: ButtonCombo.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4369355148417906, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.74
@@ -156,26 +151,6 @@ Prefab:
     - target: {fileID: 4369355148417906, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114539294685998068, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: _currentComboStage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114539294685998068, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: ButtonCombo.Array.data[0]
-      value: '"d"'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114539294685998068, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: ButtonCombo.Array.data[1]
-      value: '"d"'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114539294685998068, guid: 3628089e68e254440bd53ea9191a88aa,
-        type: 2}
-      propertyPath: ButtonCombo.Array.data[2]
-      value: '"d"'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3628089e68e254440bd53ea9191a88aa, type: 2}

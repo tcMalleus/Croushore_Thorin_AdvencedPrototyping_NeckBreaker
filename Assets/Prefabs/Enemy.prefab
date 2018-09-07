@@ -139,7 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df49d589ca421244391a9e2f06c2031f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonCombo: []
+  ButtonCombo:
+  - '"d"'
+  - '"d"'
+  - '"d"'
   _currentComboStage: 0
   _currentComboKey: 
   _nextComboKey: 
@@ -153,7 +156,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136906644634566474
 CapsuleCollider:

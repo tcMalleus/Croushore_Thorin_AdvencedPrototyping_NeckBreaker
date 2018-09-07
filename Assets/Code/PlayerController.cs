@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour {
         if (triggered && !other)
         {
             nearEnemy = false;
+            isGrabbed = false;
         }
 
         //Inputs
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 
             agent.enabled = true;
 
-            isGrabbed = false;
+            isGrabbedRight = false;
         }
         
         if (Input.GetAxis("GrabLeft") >= 1 || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -88,20 +89,38 @@ public class PlayerController : MonoBehaviour {
             }
 
             agent.enabled = true;
+
+            isGrabbedLeft = false;
         }
 
         if (isGrabbedLeft == true || isGrabbedRight == true)
         {
             isGrabbed = true;
+            if (closest)
+            {
+                closest.position = Vector3.MoveTowards(closest.position, grabOffset.transform.position, 20 * Time.deltaTime);
+            }
+        }
+        else
+        {
+            isGrabbed = false;
         }
 
         if (isGrabbedLeft == true && isGrabbedRight == true)
         {
             isDoubleGrabbed = true;
+            if (closest)
+            {
+                closest.position = Vector3.MoveTowards(closest.position, grabOffset.transform.position, 20 * Time.deltaTime);
+            }
+        }
+        else
+        {
+            isDoubleGrabbed = false;
         }
 
         //Twist inputs
-        if (isGrabbed = true && Input.GetKeyDown(KeyCode.D))
+        if (isGrabbed == true && Input.GetKeyDown(KeyCode.D))
         {
             TwistRight();
         } 
@@ -110,8 +129,9 @@ public class PlayerController : MonoBehaviour {
             isTwisted = false;
         }
 
+
         //Push key to ComboManager
-        if (Input.inputString != null && nearEnemy == true)
+        if (Input.inputString != string.Empty && isGrabbed == true)
         {
             ComboManager.UpdateCombo(Input.inputString);
         }
@@ -171,8 +191,6 @@ public class PlayerController : MonoBehaviour {
         {
             isGrabbedRight = true;
 
-            closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
-
             foreach (GameObject enemy in enemies)
             {
                 NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
@@ -188,8 +206,6 @@ public class PlayerController : MonoBehaviour {
         if (nearEnemy == true)
         {
             isGrabbedLeft = true;
-
-            closest.position = Vector3.Lerp(closest.position, grabOffset.transform.position, 20);
 
             foreach (GameObject enemy in enemies)
             {

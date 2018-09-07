@@ -12,12 +12,16 @@ public class ComboManager : MonoBehaviour {
     public string _currentComboKey;
     public string _nextComboKey;
 
-	//Start
-	void Start () {
+    private PlayerController player;
+
+
+    //Start
+    void Start () {
 
         _currentComboKey = ButtonCombo[0];
         _nextComboKey = ButtonCombo[1];
-		
+
+        player = FindObjectOfType<PlayerController>();
 	}
 	
 	//Update
@@ -39,6 +43,11 @@ public class ComboManager : MonoBehaviour {
         {
             _currentComboKey = ButtonCombo[0];
             _currentComboStage = 0;
+        }
+
+        if (_currentComboStage  == ButtonCombo.Count)
+        {
+            Destroy(gameObject);
         }
     }
 }

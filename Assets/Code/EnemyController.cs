@@ -28,10 +28,10 @@ public class EnemyController : MonoBehaviour {
                 agent.destination = player.transform.position;
             }
 
-            if (player.isTwisted == true && player.closest == gameObject.transform)
+            /*if (player.isTwisted == true && player.closest == gameObject.transform)
             {
                 Destroy(gameObject);
-            }
+            }*/
         }
     }
 
