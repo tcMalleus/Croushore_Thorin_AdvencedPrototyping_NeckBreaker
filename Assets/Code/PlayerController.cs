@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour {
         //Push key to ComboManager
         if (Input.inputString != string.Empty && isGrabbed == true)
         {
-            ComboManager.UpdateCombo(Input.inputString);
+            closest.GetComponentInParent<ComboManager>().UpdateCombo(Input.inputString);
         }
     }
 

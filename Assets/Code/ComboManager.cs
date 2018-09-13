@@ -18,8 +18,9 @@ public class ComboManager : MonoBehaviour {
     //Start
     void Start () {
 
-        _currentComboKey = ButtonCombo[0];
+        _currentComboKey = ButtonCombo[1];
         _nextComboKey = ButtonCombo[1];
+        _currentComboStage = 1;
 
         player = FindObjectOfType<PlayerController>();
 	}
@@ -33,9 +34,12 @@ public class ComboManager : MonoBehaviour {
     {
 
         Debug.Log(_keyJustHit);
+        Debug.Log(_currentComboKey);
 
-        if (_currentComboKey == _keyJustHit && _currentComboStage + 1 < ButtonCombo.Count)
+        if (_keyJustHit == _currentComboKey && _currentComboStage + 1 < ButtonCombo.Count)
         {
+            Debug.Log(_currentComboStage);
+
             _currentComboKey = ButtonCombo[_currentComboStage + 1];
             _currentComboStage++;
         }
@@ -45,7 +49,7 @@ public class ComboManager : MonoBehaviour {
             _currentComboStage = 0;
         }
 
-        if (_currentComboStage  == ButtonCombo.Count)
+        if (_currentComboStage == ButtonCombo.Count - 1)
         {
             Destroy(gameObject);
         }
