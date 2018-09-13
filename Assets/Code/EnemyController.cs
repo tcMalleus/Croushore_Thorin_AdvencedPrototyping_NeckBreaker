@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour {
     private bool playerInTrigger;
     private PlayerController player;
 
+    public int damage = 1;
+
     //Start
 	void Start ()
     {

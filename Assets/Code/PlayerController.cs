@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
     //Combo manager's
     public ComboManager ComboManager;
 
+    private int Health = 2;
+
 
     //Start
     void Start ()
@@ -54,9 +56,10 @@ public class PlayerController : MonoBehaviour {
             isGrabbed = false;
         }
 
+
         //Inputs
         //Grab inputs
-        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKey(KeyCode.RightArrow))
         {
             GrabRight();
         }
@@ -96,7 +99,7 @@ public class PlayerController : MonoBehaviour {
         if (isGrabbedLeft == true || isGrabbedRight == true)
         {
             isGrabbed = true;
-            if (closest)
+            if (closest && nearEnemy == true)
             {
                 closest.position = Vector3.MoveTowards(closest.position, grabOffset.transform.position, 20 * Time.deltaTime);
             }
@@ -109,7 +112,7 @@ public class PlayerController : MonoBehaviour {
         if (isGrabbedLeft == true && isGrabbedRight == true)
         {
             isDoubleGrabbed = true;
-            if (closest)
+            if (closest && nearEnemy == true)
             {
                 closest.position = Vector3.MoveTowards(closest.position, grabOffset.transform.position, 20 * Time.deltaTime);
             }
@@ -158,13 +161,26 @@ public class PlayerController : MonoBehaviour {
                 {
                     closest = go.transform;
                     distance = curDistance;
+
+                    if (curDistance < 1)
+                    {
+                        Health = Health - closest.GetComponentInParent<EnemyController>().damage;
+                        Destroy(closest.gameObject);
+                    }
                 }
+            }
+
+            if (Health <= 0)
+            {
+                Time.timeScale = 0;
             }
 
             if(agent.enabled == true && closest)
             {
                 agent.destination = closest.position;
             }
+
+            Debug.Log(Health);
         }
     }
 
@@ -191,12 +207,11 @@ public class PlayerController : MonoBehaviour {
         {
             isGrabbedRight = true;
 
-            foreach (GameObject enemy in enemies)
+            /*foreach (GameObject enemy in enemies)
             {
                 NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
                 enemyNav.enabled = false;
-            }
-
+            }*/
             agent.enabled = false;
         }      
     }
@@ -207,11 +222,11 @@ public class PlayerController : MonoBehaviour {
         {
             isGrabbedLeft = true;
 
-            foreach (GameObject enemy in enemies)
+            /*foreach (GameObject enemy in enemies)
             {
                 NavMeshAgent enemyNav = enemy.GetComponentInParent<NavMeshAgent>();
                 enemyNav.enabled = false;
-            }
+            }*/
 
             agent.enabled = false;
         }

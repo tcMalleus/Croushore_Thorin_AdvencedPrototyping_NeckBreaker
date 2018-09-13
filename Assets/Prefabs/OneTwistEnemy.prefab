@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135365824035375514}
   - component: {fileID: 114539294685998068}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: OneTwistEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,13 +128,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0f84e56d378e0449a3e4a6e4a17ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
 --- !u!114 &114539294685998068
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1646804180636998}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df49d589ca421244391a9e2f06c2031f, type: 3}
   m_Name: 

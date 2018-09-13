@@ -18,9 +18,9 @@ public class ComboManager : MonoBehaviour {
     //Start
     void Start () {
 
-        _currentComboKey = ButtonCombo[1];
+        _currentComboKey = ButtonCombo[0];
         _nextComboKey = ButtonCombo[1];
-        _currentComboStage = 1;
+        _currentComboStage = 0;
 
         player = FindObjectOfType<PlayerController>();
 	}
