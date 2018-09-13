@@ -142,8 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonCombo:
   - d
-  - a
-  - s
   - 
   _currentComboStage: 0
   _currentComboKey: 

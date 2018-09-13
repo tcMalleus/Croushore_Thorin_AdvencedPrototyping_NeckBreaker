@@ -90,7 +90,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: db8e2c35d3f2fd14a95e5a1782753334, type: 2}
+  - {fileID: 2100000, guid: 51645222b5b506a4a99b8cd66a3986e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,9 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonCombo:
-  - d
   - a
-  - s
+  - d
   - 
   _currentComboStage: 0
   _currentComboKey: 
