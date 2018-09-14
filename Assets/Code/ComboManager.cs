@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class ComboManager : MonoBehaviour {
@@ -13,6 +14,8 @@ public class ComboManager : MonoBehaviour {
     public string _nextComboKey;
 
     private PlayerController player;
+    private Rigidbody _rigid;
+    public bool isDead;
 
 
     //Start
@@ -23,6 +26,8 @@ public class ComboManager : MonoBehaviour {
         _currentComboStage = 0;
 
         player = FindObjectOfType<PlayerController>();
+
+        _rigid = GetComponent<Rigidbody>();
 	}
 	
 	//Update
@@ -47,10 +52,24 @@ public class ComboManager : MonoBehaviour {
         {
             _currentComboKey = ButtonCombo[0];
             _currentComboStage = 0;
+            player.isGrabbed = false;
         }
 
         if (_currentComboStage == ButtonCombo.Count - 1)
         {
+            isDead = true;
+            player.isGrabbed = false;
+            gameObject.GetComponent<EnemyController>().enabled = false;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            if (_keyJustHit == "d")
+            {
+                _rigid.AddForce(transform.right * -500);
+            }
+
+            if (_keyJustHit == "a")
+            {
+                _rigid.AddForce(transform.right * 500);
+            }
             Destroy(gameObject);
         }
     }

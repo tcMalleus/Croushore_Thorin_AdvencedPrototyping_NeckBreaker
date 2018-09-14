@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -30,11 +31,29 @@ public class PlayerController : MonoBehaviour {
 
     private int Health = 2;
 
+    private GameObject _rightArm;
+    private Vector3 _rightArmOrigPos;
+    private GameObject _leftArm;
+    private Vector3 _leftArmOrigPos;
+
+    public GameObject gameOverScreen;
+
+
 
     //Start
     void Start ()
     {
         ComboManager = FindObjectOfType<ComboManager>();
+
+        gameOverScreen.SetActive(false);
+
+
+        _leftArm = GameObject.Find("Arm_Left");
+        _leftArmOrigPos = _leftArm.transform.localPosition;
+        _rightArm = GameObject.Find("Arm_Right");
+        _rightArmOrigPos = _rightArm.transform.localPosition;
+
+
 
         //NavMeshAgent and coroutine's definitions
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -59,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 
         //Inputs
         //Grab inputs
-        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetAxis("GrabRight") >= 1 || Input.GetKeyDown(KeyCode.RightArrow))
         {
             GrabRight();
         }
@@ -76,12 +95,15 @@ public class PlayerController : MonoBehaviour {
 
             agent.enabled = true;
 
+            _rightArm.transform.localPosition = _rightArmOrigPos;
+
             isGrabbedRight = false;
         }
         
         if (Input.GetAxis("GrabLeft") >= 1 || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             GrabLeft();
+            
         }
         else if (Input.GetAxis("GrabRight") <= 1 && Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -92,6 +114,8 @@ public class PlayerController : MonoBehaviour {
             }
 
             agent.enabled = true;
+
+            _leftArm.transform.localPosition = _leftArmOrigPos;
 
             isGrabbedLeft = false;
         }
@@ -173,6 +197,7 @@ public class PlayerController : MonoBehaviour {
             if (Health <= 0)
             {
                 Time.timeScale = 0;
+                gameOverScreen.SetActive(true);
             }
 
             if(agent.enabled == true && closest)
@@ -202,6 +227,7 @@ public class PlayerController : MonoBehaviour {
     //Action functions
     public void GrabRight()
     {
+        _rightArm.transform.localPosition = _rightArm.transform.localPosition + new Vector3(0.5f, 0, 0);
 
         if (nearEnemy == true)
         {
@@ -218,6 +244,9 @@ public class PlayerController : MonoBehaviour {
 
     public void GrabLeft()
     {
+        _leftArm.transform.localPosition = _leftArm.transform.localPosition + new Vector3(0.5f, 0, 0);
+
+
         if (nearEnemy == true)
         {
             isGrabbedLeft = true;
